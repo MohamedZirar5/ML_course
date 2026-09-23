@@ -73,7 +73,7 @@ def gradient_descent_visualization(
 
     ws_to_be_plotted = np.stack(gradient_ws)
     if n_iter is not None:
-        ws_to_be_plotted = ws_to_be_plotted[:n_iter]
+        ws_to_be_plotted = ws_to_be_plotted[: max(1, min(n_iter, len(ws_to_be_plotted)))]
 
     ax1, ax2 = fig.get_axes()[0], fig.get_axes()[2]
     ax1.plot(
@@ -82,6 +82,19 @@ def gradient_descent_visualization(
         marker="o",
         color="w",
         markersize=10,
+    )
+    ax1.plot(
+        ws_to_be_plotted[-1, 0],
+        ws_to_be_plotted[-1, 1],
+        marker="o",
+        color="yellow",
+        markeredgecolor="black",
+        markersize=8,
+    )
+    ax1.set_title(
+        "current w = [{:.2f}, {:.2f}]".format(
+            ws_to_be_plotted[-1, 0], ws_to_be_plotted[-1, 1]
+        )
     )
     pred_x, pred_y = prediction(
         ws_to_be_plotted[-1, 0], ws_to_be_plotted[-1, 1], mean_x, std_x

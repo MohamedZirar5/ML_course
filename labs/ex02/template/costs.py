@@ -17,6 +17,6 @@ def compute_loss(y, tx, w):
     """
     # ***************************************************
     # INSERT YOUR CODE HERE
-    # TODO: compute loss by MSE
     # ***************************************************
-    raise NotImplementedError
+    N = y.shape[0]
+    return np.sum((y - tx @ w) ** 2) / (2 * N)
