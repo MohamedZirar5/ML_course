@@ -6,6 +6,10 @@ Ridge Regression
 
 import numpy as np
 
+def compute_loss(y, tx, w):
+    """implementation of MSE loss"""
+    return np.sum((y - tx @ w)**2)/(2*N)
+
 
 def ridge_regression(y, tx, lambda_):
     """implement ridge regression.
@@ -27,4 +31,7 @@ def ridge_regression(y, tx, lambda_):
     # COPY YOUR CODE FROM EX03 HERE
     # ridge regression: TODO
     # ***************************************************
-    raise NotImplementedError
+    N = tx.shape[0]
+    D = tx.shape[1]
+    return np.linalg.solve(tx.T @ tx + 2 * N * lambda_ * np.eye(D), tx.T @ y)
+        
